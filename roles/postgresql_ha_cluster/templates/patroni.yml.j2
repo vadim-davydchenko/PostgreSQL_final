@@ -1,0 +1,48 @@
+scope: patroni
+namespace: /db/
+name: "{{ inventory_hostname }}"
+restapi:
+  listen: "{{ ansible_host }}:8008"
+  connect_address: "{{ ansible_host }}:8008"
+etcd:
+  hosts: "128.199.32.243:2379,64.227.64.50:2379,128.199.32.77:2379"
+bootstrap:
+  dcs:
+    ttl: 90
+    loop_wait: 10
+    retry_timeout: 10
+    postgresql:
+      use_pg_rewind: true
+      use_slots: true
+      parameters:
+        wal_level: replica
+        hot_standby: "on"
+        max_connections: 100
+        max_worker_processes: 8
+        wal_keep_segments: 8
+        max_wal_senders: 5
+        max_replication_slots: 5
+  initdb:
+  - encoding: UTF8
+  - data-checksums
+  - locale: en_US.UTF8
+  pg_hba:
+  - host replication replicator 127.0.0.1/8 md5
+  - host all all 0.0.0.0/0 md5
+  users:
+    rebrain_admin:
+      password: rebrain_admin_password
+      options:
+      - createrole
+      - createdb
+postgresql:
+  listen: "{{ ansible_host }}:5432"
+  connect_address: "{{ ansible_host }}:5432"
+  data_dir: "/var/lib/postgresql/data"
+  authentication:
+    replication:
+      username: replicator
+      password: replicator_password
+    superuser:
+      username: root
+      password: admin_password

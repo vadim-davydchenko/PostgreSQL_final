@@ -1,4 +1,4 @@
-name: 'etcd-1' 
+name: 'etcd-3'
 
 data-dir: '/etc/etcd/data-dir'
 
@@ -13,9 +13,9 @@ election-timeout: 1000
 quota-backend-bytes: 0
 
 # менять на каждой ноде etcd
-listen-peer-urls: http://128.199.32.243:2380 
+listen-peer-urls: http://128.199.32.77:2380
 
-listen-client-urls: http://128.199.32.243:2379
+listen-client-urls: http://128.199.32.77:2379
 
 max-snapshots: 5
 
@@ -24,10 +24,10 @@ max-wals: 5
 cors:
 
 # менять на каждой ноде etcd
-initial-advertise-peer-urls: http://128.199.32.243:2380
+initial-advertise-peer-urls: http://128.199.32.77:2380
 
  # менять на каждой ноде etcd
-advertise-client-urls: http://128.199.32.243:2379
+advertise-client-urls: http://128.199.32.77:2379
 
 # Discovery URL used to bootstrap the cluster.
 discovery:
@@ -93,7 +93,7 @@ client-transport-security:
   auto-tls: false
 
 peer-transport-security:
-  
+
   cert-file:
 
   key-file:

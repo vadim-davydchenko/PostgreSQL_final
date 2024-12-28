@@ -1,0 +1,36 @@
+all:
+  children:
+    etcd_nodes:
+      hosts:
+        etcd-1:
+          ansible_host: 128.199.32.243
+        etcd-2:
+          ansible_host: 64.227.64.50
+        etcd-3:
+          ansible_host: 128.199.32.77
+    patroni_nodes:
+      hosts:
+        patroni-leader:
+          ansible_host: 128.199.33.215
+        patroni-sync:
+          ansible_host: 128.199.35.16
+        patroni-async:
+          ansible_host: 178.128.242.79
+        patroni-standby:
+          ansible_host: 128.199.38.54
+    haproxy_nodes:
+      hosts:
+        haproxy-1:
+          ansible_host: 178.128.250.78
+        haproxy-2:
+          ansible_host: 64.227.68.233
+    pgbouncer_nodes:
+      hosts:
+        pgbouncer-1:
+          ansible_host: 128.199.38.54
+        pgbouncer-2:
+          ansible_host: 178.128.242.79
+    monitoring:
+      hosts:
+        monitoring-1:
+          ansible_host: 128.199.33.215

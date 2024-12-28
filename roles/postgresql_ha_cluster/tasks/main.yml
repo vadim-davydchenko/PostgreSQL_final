@@ -1,0 +1,17 @@
+- name: Install packages
+  ansible.builtin.include_tasks: install.yml
+
+- name: Configure etcd
+  ansible.builtin.include_tasks: configure_etcd.yml
+
+- name: Configure Patroni
+  ansible.builtin.include_tasks: configure_patroni.yml
+
+- name: Configure Haproxy
+  ansible.builtin.include_tasks: configure_haproxy.yml
+
+- name: Configure PgBouncer
+  ansible.builtin.include_tasks: configure_pgbouncer.yml
+
+- name: Configure Monitoring
+  ansible.builtin.include_tasks: configure_monitoring.yml

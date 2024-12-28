@@ -1,0 +1,7 @@
+- name: Deploy etcd configuration file
+  ansible.builtin.template:
+    src: etcd_template.yml.j2
+    dest: /etc/etcd/etcd.yml
+    mode: "0644"
+  notify:
+    - Restart etcd serviceRestart etcd service

@@ -1,0 +1,55 @@
+- name: Download Prometheus tar
+  when: "inventory_hostname in groups['monitoring']"
+  ansible.builtin.get_url:
+    url: https://github.com/prometheus/prometheus/releases/latest/download/prometheus-linux-amd64.tar.gz
+    dest: /tmp/prometheus.tar.gz
+    mode: "0644"
+
+- name: Unarchive Prometheus tar
+  when: "inventory_hostname in groups['monitoring']"
+  ansible.builtin.unarchive:
+    src: /tmp/prometheus.tar.gz
+    dest: /usr/local/bin/
+    mode: "0644"
+
+- name: Install Prometheus binary
+  when: "inventory_hostname in groups['monitoring']"
+  ansible.builtin.shell: |
+    rm -rf /usr/local/bin/prometheus-*
+    chmod +x /usr/local/bin/prometheus /usr/local/bin/promtool
+  changed_when: false
+
+- name: Download Etcd tar
+  when: "inventory_hostname in groups['etcd_nodes']"
+  ansible.builtin.get_url:
+    url: https://github.com/etcd-io/etcd/releases/latest/download/etcd-linux-amd64.tar.gz
+    dest: /tmp/etcd.tar.gz
+    mode: "0644"
+
+- name: Unarchive Etcd tar
+  when: "inventory_hostname in groups['etcd_nodes']"
+  ansible.builtin.unarchive:
+    src: /tmp/etcd.tar.gz
+    dest: /usr/local/bin/
+    mode: "0644"
+
+- name: Install Etcd binary
+  when: "inventory_hostname in groups['etcd_nodes']"
+  ansible.builtin.shell: |
+    rm -rf /usr/local/bin/etcd-*
+    chmod +x /usr/local/bin/etcd /usr/local/bin/etcdctl
+  changed_when: false
+
+- name: Install postgresql packages
+  when: "inventory_hostname in groups['patroni_nodes']"
+  ansible.builtin.apt:
+    name: postgresql
+    state: present
+    update_cache: true
+
+- name: Install HAProxy packages
+  when: "inventory_hostname in groups['haprxoy_nodes']"
+  ansible.builtin.apt:
+    name: haproxy
+    state: present
+    update_cache: true

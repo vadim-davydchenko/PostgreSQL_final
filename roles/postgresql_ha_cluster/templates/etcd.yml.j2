@@ -1,0 +1,21 @@
+name: "{{ inventory_hostname }}"
+data-dir: "/var/lib/etcd/data"
+wal-dir: "/var/lib/etcd/wal"
+snapshot-count: 10000
+heartbeat-interval: 100
+election-timeout: 1000
+quota-backend-bytes: 0
+listen-peer-urls: "http://{{ ansible_host }}:2380"
+listen-client-urls: "http://{{ ansible_host }}:2379"
+initial-advertise-peer-urls: "http://{{ ansible_host }}:2380"
+advertise-client-urls: "http://{{ ansible_host }}:2379"
+initial-cluster: "etcd-1=http://128.199.32.243:2380,etcd-2=http://64.227.64.50:2380,etcd-3=http://128.199.32.77:2380"
+initial-cluster-state: "new"
+initial-cluster-token: "etcd-cluster-token"
+proxy: "off"
+client-transport-security:
+  auto-tls: false
+peer-transport-security:
+  auto-tls: false
+auto-compaction-mode: periodic
+auto-compaction-retention: "1"

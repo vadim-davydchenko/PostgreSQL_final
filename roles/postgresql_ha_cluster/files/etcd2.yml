@@ -1,4 +1,4 @@
-name: 'etcd-2' 
+name: 'etcd-2'
 
 data-dir: '/etc/etcd/data-dir'
 
@@ -13,7 +13,7 @@ election-timeout: 1000
 quota-backend-bytes: 0
 
 # менять на каждой ноде etcd
-listen-peer-urls: http://64.227.64.50:2380 
+listen-peer-urls: http://64.227.64.50:2380
 
 listen-client-urls: http://64.227.64.50:2379
 
@@ -93,7 +93,7 @@ client-transport-security:
   auto-tls: false
 
 peer-transport-security:
-  
+
   cert-file:
 
   key-file:

@@ -1,0 +1,19 @@
+- name: Configure Prometheus
+  ansible.builtin.template:
+    src: prometheus_template.yml.j2
+    dest: /etc/prometheus/prometheus.yml
+    owner: prometheus
+    group: prometheus
+    mode: "0644"
+  notify:
+    - Restart Prometheus service
+
+- name: Deploy Grafana dashboards
+  ansible.builtin.copy:
+    src: grafana_dashboards/
+    dest: /var/lib/grafana/dashboards/
+    owner: grafana
+    group: grafana
+    mode: "0755"
+  notify:
+    - Restart Grafana service

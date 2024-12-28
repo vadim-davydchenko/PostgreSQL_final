@@ -1,0 +1,9 @@
+- name: Configure PgBouncer
+  ansible.builtin.template:
+    src: pgbouncer_template.ini.j2
+    dest: /etc/pgbouncer/pgbouncer.ini
+    owner: postgres
+    group: postgres
+    mode: "0644"
+  notify:
+    - Restart PgBouncer service

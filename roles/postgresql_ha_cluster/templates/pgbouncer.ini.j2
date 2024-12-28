@@ -1,0 +1,8 @@
+[databases]
+* = host={{ hostvars[groups['patroni_nodes'][0]].ansible_host }} port=5432 dbname=rebrain_courses_db user=rebrain_admin password=rebrain_admin_password
+
+[pgbouncer]
+auth_type = md5
+auth_file = /etc/pgbouncer/userlist.txt
+admin_users = rebrain_admin
+stats_users = rebrain_admin
